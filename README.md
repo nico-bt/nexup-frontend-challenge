@@ -1,5 +1,7 @@
 # Nexup Frontend Challenge
 
+### Live: 🔗https://nexup-frontend-challenge-kappa.vercel.app/  
+  
 Los datos se obtienen de https://mock-back.vercel.app/api/products  
 Solo creé ese GET enpdoint para hacer llamado tipo API Rest.
 
@@ -25,8 +27,7 @@ Este enfoque permite:
 
 ## Consideraciones de Escalabilidad
 
-El filtrado se realiza en el frontend, lo cual es adecuado para datasets pequeños o medianos.
-
+El filtrado se realiza en el frontend, lo cual es adecuado para datasets pequeños o medianos.  
 En aplicaciones con grandes volúmenes de datos o consultas complejas, podría ser mejor realizar el filtrado en el backend, incorporando:
 
 - Filtrado server-side  

@@ -2,17 +2,10 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { ProductList } from './ProductsList/ProductList';
 import { Product } from '../models/Product';
 import { getProductList } from '../api/products';
-import { CategoryFilterType } from '../models/ProductCategory';
 import { Filters } from './Filters/Filters';
-import { StatusFilterType } from '../models/ProductStatus';
 import { useDebouncedValue } from '../hooks/useDebounce';
 import { SearchInput } from './SearchInput/SearchInput';
-
-type FiltersType = {
-  category: CategoryFilterType;
-  status: StatusFilterType;
-  inStock: boolean;
-};
+import { filterProducts, FiltersType } from '../lib/filterProducts';
 
 const initialFilters: FiltersType = {
   category: 'All',
@@ -46,30 +39,10 @@ export const ProductManager = () => {
     getProducts();
   }, []);
 
-  const filteredProducts = useMemo(() => {
-    return products.filter((product) => {
-      if (filters.category !== 'All' && product.category !== filters.category) {
-        return false;
-      }
-
-      if (filters.status !== 'All' && product.status !== filters.status) {
-        return false;
-      }
-
-      if (filters.inStock && product.stock === 0) {
-        return false;
-      }
-
-      // search (debounced)
-      if (debouncedSearch.trim() !== '') {
-        const search = debouncedSearch.toLowerCase();
-        const matches = product.name.toLowerCase().includes(search);
-        if (!matches) return false;
-      }
-
-      return true;
-    });
-  }, [products, filters, debouncedSearch]);
+  const filteredProducts = useMemo(
+    () => filterProducts(products, filters, debouncedSearch),
+    [products, filters, debouncedSearch],
+  );
 
   if (isLoading) return <p>Loading...</p>;
 

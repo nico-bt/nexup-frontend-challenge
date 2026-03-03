@@ -10,9 +10,13 @@ type Props = {
 export const ProductList: React.FC<Props> = ({ productList }) => {
   return (
     <div className={styles.gridContainer}>
-      {productList.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
+      {productList.length === 0 ? (
+        <p className={styles.noItems}>No items</p>
+      ) : (
+        productList.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))
+      )}
     </div>
   );
 };

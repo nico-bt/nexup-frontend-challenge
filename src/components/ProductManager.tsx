@@ -3,13 +3,26 @@ import { ProductList } from './ProductsList/ProductList';
 import { Product } from '../models/Product';
 import { getProductList } from '../api/products';
 import { CategoryFilterType } from '../models/ProductCategory';
-import { CategoryFilter } from './CategoryFilter';
+import { Filters } from './Filters/Filters';
+import { StatusFilterType } from '../models/ProductStatus';
 
-export const ProductManager: React.FC = () => {
+type FiltersType = {
+  category: CategoryFilterType;
+  status: StatusFilterType;
+  inStock: boolean;
+};
+
+const initialFilters: FiltersType = {
+  category: 'All',
+  status: 'All',
+  inStock: false,
+};
+
+export const ProductManager = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [category, setCategory] = useState<CategoryFilterType>('All');
+  const [filters, setFilters] = useState<FiltersType>(initialFilters);
 
   useEffect(() => {
     const getProducts = async () => {
@@ -29,10 +42,22 @@ export const ProductManager: React.FC = () => {
   }, []);
 
   const filteredProducts = useMemo(() => {
-    if (category === 'All') return products;
+    return products.filter((product) => {
+      if (filters.category !== 'All' && product.category !== filters.category) {
+        return false;
+      }
 
-    return products.filter((product) => product.category === category);
-  }, [products, category]);
+      if (filters.status !== 'All' && product.status !== filters.status) {
+        return false;
+      }
+
+      if (filters.inStock && product.stock === 0) {
+        return false;
+      }
+
+      return true;
+    });
+  }, [products, filters]);
 
   if (isLoading) return <p>Loading...</p>;
 
@@ -42,10 +67,7 @@ export const ProductManager: React.FC = () => {
 
   return (
     <div>
-      <CategoryFilter
-        selectedCategory={category}
-        onChangeCategory={setCategory}
-      />
+      <Filters selectedFilters={filters} onChangeFilters={setFilters} />
       <ProductList productList={filteredProducts} />
     </div>
   );

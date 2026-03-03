@@ -1,0 +1,66 @@
+.container {
+  background-color: white;
+  padding: 20px;
+  border-top: 1px solid lightgray;
+  margin-top: 1.5rem;
+}
+
+.container h2 {
+  font-weight: 500;
+  font-variant: small-caps;
+  margin: 0;
+  margin-bottom: 0.5rem;
+}
+
+.filters {
+  display: flex;
+  gap: 4rem;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 600px) {
+  .filters {
+    display: grid;
+    gap: 1rem;
+    justify-content: center;
+    text-align: end;
+  }
+}
+
+select {
+  width: 150px;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: sans-serif;
+  cursor: pointer;
+}
+
+/* Style on focus */
+select:focus {
+  outline: 2px solid #a1a1aa;
+}
+
+input[type='checkbox'] {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.flexCenter {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 100%;
+}
+@media (max-width: 600px) {
+  .flexCenter {
+    justify-content: center;
+  }
+}
+
+label:hover {
+  cursor: pointer;
+}

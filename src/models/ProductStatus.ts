@@ -3,3 +3,5 @@ export enum ProductStatus {
   Active = 'Active',
   Inactive = 'Inactive',
 }
+
+export type StatusFilterType = ProductStatus | 'All';

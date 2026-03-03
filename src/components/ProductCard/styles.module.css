@@ -6,6 +6,7 @@
   display: grid;
   gap: 1rem;
   position: relative;
+  max-width: 492px;
 }
 
 .productCard:hover {

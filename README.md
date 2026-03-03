@@ -40,6 +40,23 @@ Ej: Pasando queries en el fetch, se puede manejar lógica en server y evitar env
   fetch(`/api/products?category=Fruit&inStock=true&status=Active&page=1&limit=20`)
   ```
 
-La implementación actual asume un volumen de datos apropiado para procesamiento en cliente.
+La implementación actual asume un volumen de datos apropiado para procesamiento en cliente.  
+
+## Testing
+Sólo testee la lógica de filtrado con Jest.
+Esta fue extraída a una función pura para facilitar tests de forma aislada.  
+
+
+## Ejecutar el proyecto en local
+
+```bash
+npm install
+npm start
+```
+Para correr tests:  
+```bash
+npm run test
+```
+
 
 

@@ -1,0 +1,42 @@
+.container {
+  width: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  margin-top: 1rem;
+  padding: 0;
+}
+
+.inputWrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin: 1rem;
+  margin-bottom: 0;
+  width: 100%;
+  max-width: 375px;
+}
+
+.input {
+  font-size: 1rem;
+  width: 100%;
+  max-width: 375px;
+  padding: 0.4rem 2rem 0.4rem 0.75rem;
+}
+
+.resetBtn {
+  position: absolute;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.75rem;
+  color: gray;
+  padding: 0;
+  line-height: 1;
+}
+
+.resetBtn:hover {
+  color: black;
+}

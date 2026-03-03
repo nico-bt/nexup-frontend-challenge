@@ -5,6 +5,8 @@ import { getProductList } from '../api/products';
 import { CategoryFilterType } from '../models/ProductCategory';
 import { Filters } from './Filters/Filters';
 import { StatusFilterType } from '../models/ProductStatus';
+import { useDebouncedValue } from '../hooks/useDebounce';
+import { SearchInput } from './SearchInput/SearchInput';
 
 type FiltersType = {
   category: CategoryFilterType;
@@ -23,6 +25,9 @@ export const ProductManager = () => {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [filters, setFilters] = useState<FiltersType>(initialFilters);
+
+  const [searchInput, setSearchInput] = useState('');
+  const debouncedSearch = useDebouncedValue(searchInput, 400);
 
   useEffect(() => {
     const getProducts = async () => {
@@ -55,9 +60,16 @@ export const ProductManager = () => {
         return false;
       }
 
+      // search (debounced)
+      if (debouncedSearch.trim() !== '') {
+        const search = debouncedSearch.toLowerCase();
+        const matches = product.name.toLowerCase().includes(search);
+        if (!matches) return false;
+      }
+
       return true;
     });
-  }, [products, filters]);
+  }, [products, filters, debouncedSearch]);
 
   if (isLoading) return <p>Loading...</p>;
 
@@ -67,6 +79,7 @@ export const ProductManager = () => {
 
   return (
     <div>
+      <SearchInput value={searchInput} onChange={setSearchInput} />
       <Filters selectedFilters={filters} onChangeFilters={setFilters} />
       <ProductList productList={filteredProducts} />
     </div>

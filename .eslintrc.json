@@ -30,7 +30,12 @@
     "prettier"
   ],
   "rules": {
-    "prettier/prettier": ["error"],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-explicit-any": "warn",
@@ -52,7 +57,10 @@
       "error",
       {
         "required": {
-          "some": ["nesting", "id"]
+          "some": [
+            "nesting",
+            "id"
+          ]
         }
       }
     ],
@@ -71,7 +79,12 @@
     },
     "import/resolver": {
       "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
       }
     }
   }

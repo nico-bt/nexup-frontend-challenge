@@ -11,3 +11,9 @@
   background-color: var(--background-color-nexup);
   padding: 20px;
 }
+
+.loading {
+  font-size: 1.75rem;
+  text-align: center;
+  margin-top: 6rem;
+}

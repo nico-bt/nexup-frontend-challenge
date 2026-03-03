@@ -44,7 +44,7 @@ export const ProductManager = () => {
     [products, filters, debouncedSearch],
   );
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <p className="loading">Loading...</p>;
 
   if (error) return <p>{error}</p>;
 
